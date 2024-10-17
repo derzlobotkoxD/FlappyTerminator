@@ -19,7 +19,7 @@ public abstract class Spawner<T> : MonoBehaviour where T : Component
             createFunc: () => CreateInstance(),
             actionOnGet: (obj) => ActivateInstance(obj),
             actionOnRelease: (obj) => obj.gameObject.SetActive(false),
-            actionOnDestroy: (obj) => Destroy(obj),
+            actionOnDestroy: (obj) => Destroy(obj.gameObject),
             collectionCheck: true,
             defaultCapacity: _defaultCapacitPool,
             maxSize: _maxSizePool);

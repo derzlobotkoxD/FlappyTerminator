@@ -1,4 +1,4 @@
-public static class Constants
+namespace Constants
 {
     public class Hotkey
     {

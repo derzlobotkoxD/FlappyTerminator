@@ -8,10 +8,14 @@ public class SpawnerEnemy : Spawner<Enemy>
     [SerializeField] private ScoreCounter _scoreCounter;
     [SerializeField] private int _maxCountEnemy = 3;
     [SerializeField] private float _delay = 3;
-    [SerializeField] Vector2 _spawnPointViewport = new Vector2(1.1f, 1.1f);
+    [SerializeField] private Vector2 _spawnPointViewport = new Vector2(1.1f, 1.1f);
+    [SerializeField] private Vector2 _spawnPointWorld;
 
-    private void Start() =>
+    private void Start()
+    {
+        _spawnPointWorld = Camera.main.ViewportToWorldPoint(_spawnPointViewport);
         StartCoroutine(SpawnWithDelay(_delay));
+    }
 
     protected override Enemy CreateInstance()
     {
@@ -39,7 +43,7 @@ public class SpawnerEnemy : Spawner<Enemy>
     }
 
     private void Spawn() =>
-        GetInstance(Camera.main.ViewportToWorldPoint(_spawnPointViewport), Quaternion.identity);
+        GetInstance(_spawnPointWorld, Quaternion.identity);
 
     private IEnumerator SpawnWithDelay(float delay)
     {

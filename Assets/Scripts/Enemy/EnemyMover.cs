@@ -13,16 +13,18 @@ public class EnemyMover : MonoBehaviour
     private float _maxHight = 0.9f;
     private float _minHight = 0.1f;
     private Coroutine _coroutine;
+    private Camera _camera;
 
     public void Move()
     {
-        Vector3 position = Camera.main.ViewportToWorldPoint(new Vector2(_currentPositionX, _hight));
+        Vector3 position = _camera.ViewportToWorldPoint(new Vector2(_currentPositionX, _hight));
         position.z = 0;
         transform.position = position;
     }
 
     public void StartMove()
     {
+        _camera = Camera.main;
         _hight = Random.Range(_minHight, _maxHight);
         _currentPositionX = _startPositionX;
         Move();
